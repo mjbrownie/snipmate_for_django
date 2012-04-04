@@ -109,3 +109,10 @@ snippet stackedinline
 		model = $1
 		extra = ${2:3}
 
+# Common Model Fields
+snippet name
+	name = models.CharField(max_length=128)
+
+snippet user
+	user = models.ForeignKey(User)
+
