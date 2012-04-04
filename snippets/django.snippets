@@ -69,6 +69,11 @@ snippet form
 		"""${2:docstring}"""
 		${3}
 
+snippet mform
+	class ${1:FormName}(forms.ModelForm):
+		"""${2:docstring}"""
+		${3}
+
 snippet model
 	class ${1:ModelName}(models.Model):
 		"""${2:docstring}"""
@@ -109,9 +114,40 @@ snippet stackedinline
 		model = $1
 		extra = ${2:3}
 
+snippet view
+	def ${1} (request${2:, }):
+		"""${3}"""
+		${4}
+
+snippet formview
+
+	class ${1:ViewForm}(forms.${2:ModelForm})
+		${3:model = }
+		pass
+
+	def ${4} (request${5:, }):
+		"""${6:docstring for $4}"""
+
+		if request.method == 'POST':
+			form = ${7:$1}(request.POST${8:,request.FILES})
+
+			if form.is_valid():
+				${9:instance} = form.save(${10:commit=False})
+				return HttpResponseRedirect(${11})
+		else:
+			form = ${12}(${13})
+		
+		return render_to_response('${14:template.html}', {
+				${15}
+			}${16:, context_instance=RequestContext(request)}
+		)
+
 # Common Model Fields
 snippet name
 	name = models.CharField(max_length=128)
+
+snippet timestamp
+	timestamp = models.DateTimeField(auto_now_add=True, auto_now=True)
 
 snippet user
 	user = models.ForeignKey(User)
@@ -121,3 +157,9 @@ snippet notes
 
 snippet comment
 	notes = models.TextField(blank=True)
+
+# Utilities
+
+snippet pdb
+	import ipdb;ipdb.set_trace()
+
