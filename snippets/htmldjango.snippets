@@ -131,4 +131,9 @@ snippet urlizetrunc
 	urlizetrunc:${1}
 snippet wordwrap
 	wordwrap:${1}
-
+snippet img
+	<img src="{% static '${1}' %}" />
+snippet js
+	<script type="text/javascript" src="{% static "${1}" %}"></script>
+snippet css
+	<style type="text/css" src="{% static "${1}" %}"></style>
